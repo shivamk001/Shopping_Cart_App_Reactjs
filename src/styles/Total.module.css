@@ -1,12 +1,21 @@
 .container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     background-color: var(--accent-color);
     color: var(--primary-color);
     padding: 1rem;
 }
 
+
+.itemButtonsWrapper {
+    margin-block: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 15%;
+    flex-wrap: wrap;
+}
 
 .itemButton {
     border: 0.2rem solid #000;
