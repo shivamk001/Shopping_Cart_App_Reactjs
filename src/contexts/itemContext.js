@@ -14,36 +14,40 @@ const CustomItemContext=({children})=>{
     const [cart, setCart]=useState([]);
     const [showCart, setShowCart]=useState(false);
 
-    const handleAdd = (price, name) => {
-        let done=false
-        cart.forEach(item=>{    
-            if(item.name===name){
-                item.qty++;
-                item.total+=price
-                done=true
-            }
-        })
-        if(!done){
-            setCart([...cart, {name: name, qty: 1, total: price}])
+    const handleAdd = (id, name, price) => {
+        let index=cart.findIndex(item=>item.id===id)
+
+        if(index===-1){
+            setCart([...cart, {id, name, price, qty:1}])
         }
-        setTotal(total+price);
-        setItem(item+1);
-        console.log('Added to cart:', cart)
+        else{
+            cart[index].qty++;
+            setCart(cart);
+            
+        }
+        setTotal(total+price)
+        setItem(item+1)
     };
-    const handleRemove = (price, name) => {
-        if(item>0){
-          setTotal(total-price);
-          setItem(item-1);
-          setCart(cart.filter(item=>item.name!==name))
-          console.log('Removed to cart:', cart)
+    const handleRemove = (id) => {
+        let index=cart.findIndex(item=>item.id===id);
+        console.log(id, index)
+        if(index!=-1){
+            setTotal(total-cart[index].price)
+            console.log(cart[index])
+            cart[index].qty--;
+            if(cart[index].qty===0){
+                cart.splice(index, 1);
+            }
+            
+            setItem(item-1);
         }
-    
     };
 
     const handleResetCart=()=>{
         // console.log('handleResetCart')
         setItem(0);
         setTotal(0);
+        setCart([])
     }
 
     const toggleShowCart=()=>{
