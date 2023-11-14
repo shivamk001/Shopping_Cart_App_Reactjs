@@ -22,8 +22,14 @@ const CustomItemContext=({children})=>{
         }
     
     };
+
+    const handleResetCart=()=>{
+        // console.log('handleResetCart')
+        setItem(0);
+        setTotal(0);
+    }
     return (
-        <itemContext.Provider value={{total, setTotal, item, setItem, handleAdd, handleRemove}}>
+        <itemContext.Provider value={{total, item, handleAdd, handleRemove, handleResetCart}}>
             {children}
         </itemContext.Provider>
     )
